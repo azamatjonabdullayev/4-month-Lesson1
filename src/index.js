@@ -1,7 +1,6 @@
 import "dotenv/config.js";
 import express from "express";
 import prisma from "./config/db.connect.js";
-import { userRoute } from "./routes/user.route.js";
 import { allRoutes } from "./routes/all.routes.js";
 import cookieParser from "cookie-parser";
 

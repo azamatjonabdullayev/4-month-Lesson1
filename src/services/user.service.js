@@ -1,5 +1,6 @@
 import prisma from "../config/db.connect.js";
 import CustomError from "../utils/error.utils.js";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export default class UserService {
@@ -43,7 +44,11 @@ export default class UserService {
 
     const newUser = await prisma.users.create({ data: userData });
 
-    return newUser;
+    const token = jwt.sign({ ...newUser, password: null }, process.env.JWT, {
+      expiresIn: "3h",
+    });
+
+    return token;
   }
 
   async updateUser(id, data) {
