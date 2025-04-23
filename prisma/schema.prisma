@@ -19,6 +19,15 @@ model Users{
   password String @db.VarChar(255)
   email String @db.VarChar(255) @unique
   description String?
+  role Roles @default(user)
   updated_at DateTime @updatedAt
   @@index([username])
+  @@map("users")
+}
+
+enum Roles {
+  superadmin
+  admin
+  user
+  teacher
 }
